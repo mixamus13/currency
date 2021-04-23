@@ -3,27 +3,26 @@ package com.mixamus.currency.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Currency {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private LocalDate date;
     private String code;
     private Double rate;
-    private Date date;
 
     public Currency() {
     }
 
-    public Integer getId() {
-        return id;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getCode() {
@@ -40,13 +39,5 @@ public class Currency {
 
     public void setRate(Double rate) {
         this.rate = rate;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 }

@@ -4,7 +4,7 @@ import com.mixamus.currency.dao.CurrencyDao;
 import com.mixamus.currency.model.Currency;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Service
 public class CurrencyService {
@@ -15,7 +15,7 @@ public class CurrencyService {
         this.currencyDao = currencyDao;
     }
 
-    public Currency getCurrencyByDate(Date data) {
+    public Currency getCurrencyByDate(LocalDate data) {
         return currencyDao.getCurrencyByDate(data);
     }
 }

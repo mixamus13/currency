@@ -2,11 +2,12 @@ package com.mixamus.currency.controller;
 
 import com.mixamus.currency.model.Currency;
 import com.mixamus.currency.service.CurrencyService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @RestController
 public class CurrencyController {
@@ -18,7 +19,9 @@ public class CurrencyController {
     }
 
     @GetMapping("currencydate")
-    public Currency getCurrencyByDate(@RequestParam Date data) {
+    public Currency getCurrencyByDate(@RequestParam("data")
+                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                              LocalDate data) {
         return currencyService.getCurrencyByDate(data);
     }
 }
