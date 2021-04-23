@@ -4,15 +4,18 @@ import com.mixamus.currency.dto.CurrencyDto;
 import com.mixamus.currency.model.Currency;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.sql.Date;
 
 @Service
 public class CurrencyService {
 
-    private CurrencyDto currencyDto;
+    private final CurrencyDto currencyDto;
 
-    public List<Currency> getAllCurrency() {
-        return null;
-//        return currencyDto.findAll();
+    public CurrencyService(CurrencyDto currencyDto) {
+        this.currencyDto = currencyDto;
+    }
+
+    public Currency getCurrencyByDate(Date data) {
+        return currencyDto.getCurrencyByDate(data);
     }
 }

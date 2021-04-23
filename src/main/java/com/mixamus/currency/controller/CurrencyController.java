@@ -1,27 +1,24 @@
 package com.mixamus.currency.controller;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mixamus.currency.model.Currency;
 import com.mixamus.currency.service.CurrencyService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Date;
+
 @RestController
-@RequiredArgsConstructor
 public class CurrencyController {
 
-    private CurrencyService currencyService;
+    private final CurrencyService currencyService;
 
-    @GetMapping("currency")
-    public String getCurrency(@RequestParam String data) throws UnirestException {
-        String url = "https://api.privatbank.ua/p24api/exchange_rates?json&date=" + data;
-        HttpResponse<String> response = Unirest
-                .get(url)
-                .asString();
+    public CurrencyController(CurrencyService currencyService) {
+        this.currencyService = currencyService;
+    }
 
-        return response.getBody();
+    @GetMapping("currencydate")
+    public Currency getCurrencyByDate(@RequestParam Date data) {
+        return currencyService.getCurrencyByDate(data);
     }
 }
