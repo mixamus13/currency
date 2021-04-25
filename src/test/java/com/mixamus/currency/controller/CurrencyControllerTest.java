@@ -50,7 +50,8 @@ class CurrencyControllerTest {
     }
 
     @Test
-    public void shouldReturnMessageFromService() throws Exception {
+    @DisplayName("Return status is OK")
+    public void shouldReturnIsOk() throws Exception {
         this.mvc.perform(get("/currencydate/?data=2021-07-12"))
                 .andExpect(status().isOk());
     }
