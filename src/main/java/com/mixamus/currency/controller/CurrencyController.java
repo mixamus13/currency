@@ -18,7 +18,7 @@ public class CurrencyController {
         this.currencyService = currencyService;
     }
 
-    @GetMapping("currencydate")
+    @GetMapping("currencydate/")
     public Currency getCurrencyByDate(@RequestParam("data")
                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                                               LocalDate data) {

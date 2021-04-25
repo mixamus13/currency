@@ -17,6 +17,12 @@ public class Currency {
     public Currency() {
     }
 
+    public Currency(LocalDate date, String code, Double rate) {
+        this.date = date;
+        this.code = code;
+        this.rate = rate;
+    }
+
     public LocalDate getDate() {
         return date;
     }

@@ -15,6 +15,11 @@ public class CurrencyService {
         this.currencyDao = currencyDao;
     }
 
+    /**
+     * Get currency by LocalDate.
+     * @param data LocalDate.
+     * @return currency.
+     */
     public Currency getCurrencyByDate(LocalDate data) {
         return currencyDao.getCurrencyByDate(data);
     }
