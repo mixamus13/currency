@@ -1,6 +1,5 @@
 package com.mixamus.currency.controller;
 
-import com.mixamus.currency.dao.CurrencyDao;
 import com.mixamus.currency.model.Currency;
 import com.mixamus.currency.service.CurrencyService;
 import org.hamcrest.Matchers;
@@ -19,9 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = CurrencyController.class)
@@ -36,9 +33,6 @@ class CurrencyControllerTest {
     @MockBean
     private CurrencyService currencyService;
 
-    @MockBean
-    private CurrencyDao currencyDao;
-
     @Test
     @DisplayName("Should Currency when making GET request to endpoint /currencydate")
     void shouldCurrencyByData() throws Exception {
@@ -49,7 +43,7 @@ class CurrencyControllerTest {
         Mockito.when(currencyService.getCurrencyByDate(localDate))
                 .thenReturn(currency);
 
-        mvc.perform(MockMvcRequestBuilders.get("/currencydate"))
+        mvc.perform(MockMvcRequestBuilders.get("/currencydate/?data=2021-07-12"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)));
@@ -57,10 +51,8 @@ class CurrencyControllerTest {
 
     @Test
     public void shouldReturnMessageFromService() throws Exception {
-        when(currencyService.getCurrencyByDate(LocalDate.of(2021, 12, 13))).thenReturn(new Currency());
-        this.mvc.perform(get("/currencydate"))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+        this.mvc.perform(get("/currencydate/?data=2021-07-12"))
+                .andExpect(status().isOk());
     }
 
     @Test
